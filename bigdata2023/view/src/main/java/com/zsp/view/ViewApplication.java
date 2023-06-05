@@ -8,7 +8,7 @@ public class ViewApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ViewApplication.class, args);
-        System.out.println("hello world");
+
     }
 
 }
