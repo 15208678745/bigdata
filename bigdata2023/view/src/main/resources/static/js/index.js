@@ -717,9 +717,7 @@
                 }
             }
         ]
-    };
-
-    // 3. 配置项和数据给我们的实例化对象
+    }; // 3. 配置项和数据给我们的实例化对象
     myChart.setOption(option);
     // 4. 当我们浏览器缩放的时候，图表也等比例缩放
     window.addEventListener("resize", function() {
@@ -727,3 +725,5 @@
         myChart.resize();
     });
 })();
+
+

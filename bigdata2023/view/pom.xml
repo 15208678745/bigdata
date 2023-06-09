@@ -20,11 +20,56 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.2.0</version>
-        </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+            </dependency>
+            <!--mysql依赖-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.42</version>
+            </dependency>
+            <!-- mybatis-plus-->
+            <!--        <dependency>-->
+            <!--            <groupId>com.baomidou</groupId>-->
+            <!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+            <!--            <version>3.2.0<ersion>-->
+            <!--        </dependency>-->
+            <!--        <dependency>-->
+            <!--            <groupId>com.baomidou</groupId>-->
+            <!--            <artifactId>mybatis-plus</artifactId>-->
+            <!--            <version>3.2.0<ersion>-->
+            <!--        </dependency>-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <!-- lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+            </dependency>
+
 
 
         <dependency>
@@ -44,10 +89,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -55,12 +97,7 @@
             <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-            <version>3.0.3</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.zsp</groupId>
             <artifactId>view</artifactId>
@@ -86,8 +123,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
-
 </project>
