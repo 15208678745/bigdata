@@ -399,7 +399,7 @@
         myChart.resize();
     });
 })();
-//折线图 优秀作品
+//折线图 -播放量
 (function() {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.querySelector(".line1 .chart"));
@@ -664,6 +664,24 @@
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+    //前端调用后端接口
+    var xdata2 = [];//x轴
+    var sData = []; // value
+    $.getJSON('http://localhost:8080/view/getInstryData', function (data) {
+        var arr = data.data
+        for (var i = 0; i < arr.length; i++) {
+            xdata2.push(arr[i].ind_name)
+            sData.push(arr[i].value)
+        }
+        myChart.setOption({
+            series:[{
+                data: sData
+            }],
+            xAxis: {
+                data: xdata2
+            }
+        })
+    });
     window.addEventListener("resize", function() {
         myChart.resize();
     });
