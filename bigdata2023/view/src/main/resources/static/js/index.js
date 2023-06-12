@@ -290,113 +290,137 @@
 
 //学习进度柱状图模块
 (function() {
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.querySelector(".bar1 .chart"));
-
-    var data = [70, 34, 60, 78, 69];
-    var titlename = ["HTML5", "CSS3", "javascript", "VUE", "NODE"];
-    var valdata = [702, 350, 610, 793, 664];
-    var myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
-    option = {
-        //图标位置
+    // 1. 实例化对象
+    var myChart = echarts.init(document.querySelector(".bar2 .chart"));
+// 定义颜色
+    var myColor = ["#FF0000", "#FF6347", "#FA8072", "#FF4500", "#FF8C00",
+        "#F4A460"];
+// 2. 指定配置和数据
+    var option = {
+// 图像框的左右上线调整
         grid: {
-            top: "10%",
-            left: "22%",
-            bottom: "10%"
+            top: '10%',
+            left: '32%',
+// right: '15%',
+            bottom: '10%',
         },
         xAxis: {
-            show: false
+            show: false,
         },
-        yAxis: [
-            {
-                show: true,
-                data: titlename,
-                inverse: true,
-                axisLine: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLabel: {
+        yAxis: [{
+            type: 'category',
+// 数据翻转
+            inverse: true,
+            data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World'],
+// 不显示y轴的线
+            axisLine: {
+                show: false
+            },
+// 不显示刻度
+            axisTick: {
+                show: false
+            },
+// 把刻度标签里面的文字颜色设置为白色
+            axisLabel: {
+                color: "#fff"
+            },
+        },{
+            show: true,
+// 数据翻转
+            inverse: true,
+            data: [19325, 23438, 31000, 121594, 134141, 681807],
+// 不显示y轴的线
+            axisLine: {
+                show: false
+            },
+// 不显示刻度
+            axisTick: {
+                show: false
+            },
+// 把刻度标签里面的文字颜色设置为白色
+            axisLabel: {
+                textStyle: {
                     color: "#fff",
-
-                    rich: {
-                        lg: {
-                            backgroundColor: "#339911",
-                            color: "#fff",
-                            borderRadius: 15,
-                            // padding: 5,
-                            align: "center",
-                            width: 15,
-                            height: 15
-                        }
-                    }
+                    fontSize: 12,
                 }
             },
-            {
-                show: true,
-                inverse: true,
-                data: valdata,
-                axisLabel: {
-                    textStyle: {
-                        fontSize: 12,
-                        color: "#fff"
-                    }
-                }
-            }
+        }
         ],
         series: [
             {
-                name: "条",
-                type: "bar",
-                yAxisIndex: 0,
-                data: data,
+                name: '框',
+                type: 'bar',
                 barCategoryGap: 50,
-                barWidth: 10,
+                BarWidth: 15,
+                data: [100, 100, 100, 100, 100, 100],
+// 给series 第二个对象里面的 添加
+                yAxisIndex: 1,
                 itemStyle: {
-                    normal: {
-                        barBorderRadius: 20,
-                        color: function(params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex % num];
-                        }
-                    }
+                    barBorderRadius: 15,
+                    color: "none",
+                    borderColor: "#00c1de",
+                    borderWidth: 15,
                 },
+            }
+            ,
+            {
+                name: '条',
+                type: 'bar',
+                data: [94.19, 100.21, 93.65, 86.33, 98.21, 92.44],
+// 给series 第一个对象里面的 添加
+                yAxisIndex: 0,
+// 修改第一组柱子的圆角
+                itemStyle: {
+                    barBorderRadius: 20,
+                    color: function (params) {
+                        console.log(params);
+                        return myColor[params.dataIndex];
+                    },
+                },
+// 柱子之间的距离
+                barCategoryGap: 50,
+// 显示柱子内的文字
+                barWidth: 10,
+// 显示柱子内的文字
                 label: {
-                    normal: {
-                        show: true,
-                        position: "inside",
-                        formatter: "{c}%"
-                    }
+                    show: true,
+                    position: "inside",
+// {c} 会自动的解析为 数据 data里面的数据
+                    formatter: "{c}%"
                 }
             },
-            {
-                name: "框",
-                type: "bar",
-                yAxisIndex: 1,
-                barCategoryGap: 50,
-                data: [100, 100, 100, 100, 100],
-                barWidth: 15,
-                itemStyle: {
-                    normal: {
-                        color: "none",
-                        borderColor: "#00c1de",
-                        borderWidth: 3,
-                        barBorderRadius: 15
-                    }
-                }
-            }
         ]
     };
-
-    // 使用刚指定的配置项和数据显示图表。
+// 3. 把配置给实例对象
     myChart.setOption(option);
-    window.addEventListener("resize", function() {
-        myChart.resize();
+//前端调用后端接口
+    var yAxis1 = [];//yAxis第一个对象
+    var yAxis2 = [];//yAxis第二个对象
+    var series1 = [];//series第二个对象
+    $.getJSON('http://localhost:8080/view/getJobItemData', function (data) {
+        var arr = data.data
+        for (var i = 0; i < arr.length; i++) {
+            yAxis1.push(arr[i].job_name);
+            yAxis2.push(arr[i].count);
+            series1.push(Math.round(arr[i].count/arr[i].total*100));
+        }
+        myChart.setOption({
+            yAxis:[{
+                data: yAxis1
+            },
+                {
+                    data: yAxis2
+                }
+            ],
+            series:[{},{
+                data: series1
+    }
+    ]
+    })
+    });
+//4. 让图标跟随屏幕去自动适应
+    window.addEventListener("resize",function(){
+        myChart.reset();
     });
 })();
 //折线图 -播放量
