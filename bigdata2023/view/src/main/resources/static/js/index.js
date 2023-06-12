@@ -269,12 +269,25 @@
         ]
     };
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    // 3. 把配置给实例对象
+    myChart.setOption(option)
+//在ViewController中，增加接口
+//前端调用后端接口
+    $.getJSON('http://localhost:8080/view/getSalRangeData', function
+        (data) {
+        myChart.setOption({
+            series:[{
+                data: data.data
+            }]
+        })
+    });
+    // 4. 让图表跟随屏幕自动的去适应
     window.addEventListener("resize", function() {
         myChart.resize();
     });
 })();
+
+
 //学习进度柱状图模块
 (function() {
     // 基于准备好的dom，初始化echarts实例
