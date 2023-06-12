@@ -58,4 +58,13 @@ public class ViewController {
         Result result = Result.success(data);
         return result;
     }
+
+    @RequestMapping("/getJobSupplierDemanderData")
+    public Result getJobSupplierDemanderData(){
+        System.out.println("接收前端发起的年月职位数量数据JSON请求，查询mysql将数据返 回");
+        List<Map<String, Object>> data = viewMapper.getJobSupplierDemanderData();
+        Result result = Result.success(data);
+        return result;
+    }
+
 }

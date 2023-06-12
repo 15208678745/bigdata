@@ -1,4 +1,4 @@
-// 柱状图1模块
+// 柱状图1模块--不同行业职业需求数量
 (function() {
     // 实例化对象
     var myChart = echarts.init(document.querySelector(".bar .chart"));
@@ -99,7 +99,7 @@
     });
 })();
 
-//折线图定制
+//折线图定制--折线图人员变化
 (function() {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.querySelector(".line .chart"));
@@ -214,8 +214,8 @@
     });
 })();
 
-//饼形图定制
-//折线图定制
+
+//折线图定制--薪资年龄
 (function() {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.querySelector(".pie .chart"));
@@ -270,16 +270,42 @@
     };
 
     // 3. 把配置给实例对象
-    myChart.setOption(option)
-//在ViewController中，增加接口
+    myChart.setOption(option);
 //前端调用后端接口
-    $.getJSON('http://localhost:8080/view/getSalRangeData', function
+    var year_2022_1 = [];//2022年第一个对象
+    var year_2022_2 = [];//2022年第二个对象
+    var year_2023_1 = [];//2023年第一个对象
+    var year_2023_2 = [];//2023年第二个对象
+    $.getJSON('http://localhost:8080/view/getJobSupplierDemanderData', function
         (data) {
+        var arr = data.data
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].type ==0 && (arr[i].date.substr(0,4)=='2022')) {
+                year_2022_1.push(arr[i].count)
+            }
+            else if (arr[i].type ==1 && (arr[i].date.substr(0,4)=='2022')) {
+                year_2022_2.push(arr[i].count)
+            }
+            else if (arr[i].type ==0 && (arr[i].date.substr(0,4)=='2023')) {
+                year_2023_1.push(arr[i].count)
+            }
+            else if (arr[i].type ==1 && (arr[i].date.substr(0,4)=='2023')) {
+                year_2023_2.push(arr[i].count)
+            }
+        }
+//****************mine
+        yearData[0].data=[year_2022_1, year_2022_2];
+        yearData[1].data=[year_2023_1, year_2023_2];
+//****************mine
         myChart.setOption({
             series:[{
-                data: data.data
-            }]
-        })
+                data: year_2022_1
+            },
+                {
+                    data: year_2022_2
+                }
+            ]
+    })
     });
     // 4. 让图表跟随屏幕自动的去适应
     window.addEventListener("resize", function() {
@@ -287,113 +313,114 @@
     });
 })();
 
-
 //学习进度柱状图模块
 (function() {
-    // 1. 实例化对象
-    var myChart = echarts.init(document.querySelector(".bar2 .chart"));
-// 定义颜色
-    var myColor = ["#FF0000", "#FF6347", "#FA8072", "#FF4500", "#FF8C00",
-        "#F4A460"];
-// 2. 指定配置和数据
-    var option = {
-// 图像框的左右上线调整
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.querySelector(".bar1 .chart"));
+
+    var data = [70, 34, 60, 78, 69];
+        var titlename = ["HTML5", "CSS3", "javascript", "VUE", "NODE","数据库"];
+    var valdata = [702, 350, 610, 793, 664];
+    var myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
+    option = {
+        //图标位置
         grid: {
-            top: '10%',
-            left: '32%',
-// right: '15%',
-            bottom: '10%',
+            top: "10%",
+            left: "22%",
+            bottom: "10%"
         },
         xAxis: {
-            show: false,
+            show: false
         },
-        yAxis: [{
-            type: 'category',
-// 数据翻转
-            inverse: true,
-            data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World'],
-// 不显示y轴的线
-            axisLine: {
-                show: false
-            },
-// 不显示刻度
-            axisTick: {
-                show: false
-            },
-// 把刻度标签里面的文字颜色设置为白色
-            axisLabel: {
-                color: "#fff"
-            },
-        },{
-            show: true,
-// 数据翻转
-            inverse: true,
-            data: [19325, 23438, 31000, 121594, 134141, 681807],
-// 不显示y轴的线
-            axisLine: {
-                show: false
-            },
-// 不显示刻度
-            axisTick: {
-                show: false
-            },
-// 把刻度标签里面的文字颜色设置为白色
-            axisLabel: {
-                textStyle: {
+        yAxis: [
+            {
+                show: true,
+                data: titlename,
+                inverse: true,
+                axisLine: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
                     color: "#fff",
-                    fontSize: 12,
+
+                    rich: {
+                        lg: {
+                            backgroundColor: "#339911",
+                            color: "#fff",
+                            borderRadius: 15,
+                            // padding: 5,
+                            align: "center",
+                            width: 15,
+                            height: 15
+                        }
+                    }
                 }
             },
-        }
+            {
+                show: true,
+                inverse: true,
+                data: valdata,
+                axisLabel: {
+                    textStyle: {
+                        fontSize: 12,
+                        color: "#fff"
+                    }
+                }
+            }
         ],
         series: [
             {
-                name: '框',
-                type: 'bar',
-                barCategoryGap: 50,
-                BarWidth: 15,
-                data: [100, 100, 100, 100, 100, 100],
-// 给series 第二个对象里面的 添加
-                yAxisIndex: 1,
-                itemStyle: {
-                    barBorderRadius: 15,
-                    color: "none",
-                    borderColor: "#00c1de",
-                    borderWidth: 15,
-                },
-            }
-            ,
-            {
-                name: '条',
-                type: 'bar',
-                data: [94.19, 100.21, 93.65, 86.33, 98.21, 92.44],
-// 给series 第一个对象里面的 添加
+                name: "条",
+                type: "bar",
                 yAxisIndex: 0,
-// 修改第一组柱子的圆角
-                itemStyle: {
-                    barBorderRadius: 20,
-                    color: function (params) {
-                        console.log(params);
-                        return myColor[params.dataIndex];
-                    },
-                },
-// 柱子之间的距离
+                data: data,
                 barCategoryGap: 50,
-// 显示柱子内的文字
                 barWidth: 10,
-// 显示柱子内的文字
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 20,
+                        color: function(params) {
+                            var num = myColor.length;
+                            return myColor[params.dataIndex % num];
+                        }
+                    }
+                },
                 label: {
-                    show: true,
-                    position: "inside",
-// {c} 会自动的解析为 数据 data里面的数据
-                    formatter: "{c}%"
+                    normal: {
+                        show: true,
+                        position: "inside",
+                        formatter: "{c}%"
+                    }
                 }
             },
+            {
+                name: "框",
+                type: "bar",
+                yAxisIndex: 1,
+                barCategoryGap: 50,
+                data: [100, 100, 100, 100, 100],
+                barWidth: 15,
+                itemStyle: {
+                    normal: {
+                        color: "none",
+                        borderColor: "#00c1de",
+                        borderWidth: 3,
+                        barBorderRadius: 15
+                    }
+                }
+            }
         ]
     };
-// 3. 把配置给实例对象
+
+    // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
-//前端调用后端接口
+    //前端调用后端接口
     var yAxis1 = [];//yAxis第一个对象
     var yAxis2 = [];//yAxis第二个对象
     var series1 = [];//series第二个对象
@@ -413,14 +440,13 @@
                 }
             ],
             series:[{},{
-                data: series1
+data: series1
     }
     ]
     })
     });
-//4. 让图标跟随屏幕去自动适应
-    window.addEventListener("resize",function(){
-        myChart.reset();
+    window.addEventListener("resize", function() {
+        myChart.resize();
     });
 })();
 //折线图 -播放量
