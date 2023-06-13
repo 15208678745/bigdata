@@ -263,9 +263,9 @@
 
     })();
 
-//折线图定制--薪资年龄
 
-//饼图1 √
+
+//饼图1 √//折线图定制--薪资年龄
 (function () {
     var myChart = echarts.init(document.querySelector(".pie .chart"));
     option = {
@@ -318,7 +318,7 @@
 })();
 
 
-//学习进度柱状图模块
+
 //条形图
 // 条形图
 (function () {
@@ -697,7 +697,7 @@
     });
 })();
 
-//点位分布统计模块
+//饼图2    点位分布统计模块
 (function() {
     // 1. 实例化对象
     var myChart = echarts.init(document.querySelector(".pie1  .chart"));
@@ -761,6 +761,14 @@
     }; // 3. 配置项和数据给我们的实例化对象
     myChart.setOption(option);
 
+    // 前端调用后端接口
+    $.getJSON('http://127.0.0.1:8080/view/getAreaData', function (data) {
+        myChart.setOption({
+            series: [{
+                data: data.data
+            }]
+        })
+    })
     // 4. 当我们浏览器缩放的时候，图表也等比例缩放
     window.addEventListener("resize", function() {
         // 让我们的图表调用 resize这个方法
