@@ -83,6 +83,13 @@
 
     // 把配置给实例对象
     myChart.setOption(option);
+    $.getJSON('http://127.0.0.1:8080/view/getInstryData', function (data) {
+        myChart.setOption({
+            series: [{
+                data: data.data
+            }]
+        })
+    })
     window.addEventListener("resize", function() {
         myChart.resize();
     });
