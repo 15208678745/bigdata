@@ -526,7 +526,7 @@
         ],
         series: [
             {
-                name: "播放量",
+                name: "就业行业",
                 type: "line",
                 smooth: true,
                 symbol: "circle",
