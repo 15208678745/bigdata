@@ -83,7 +83,7 @@
 
     // 把配置给实例对象
     myChart.setOption(option);
-    $.getJSON('http://127.0.0.1:8080/view/getInstryData', function (data) {
+    $.getJSON('http://localhost:8080/view/getInstryData', function (data) {
         myChart.setOption({
             series: [{
                 data: data.data
@@ -311,7 +311,7 @@
     myChart.setOption(option);
 
     // 前端调用后端接口
-    $.getJSON('http://127.0.0.1:8080/view/getSalRangeData', function (data) {
+    $.getJSON('http://localhost:8080/view/getSalRangeData', function (data) {
         myChart.setOption({
             series: [{
                 data: data.data
@@ -328,6 +328,7 @@
 
 //条形图
 // 条形图
+//新的代码
 (function () {
     // 实例化对象
     var myChart = echarts.init(document.querySelector(".bar1 .chart"));
@@ -785,7 +786,7 @@
     myChart.setOption(option);
 
     // 前端调用后端接口
-    $.getJSON('http://127.0.0.1:8080/view/getAreaData', function (data) {
+    $.getJSON('http://localhost:8080/view/getAreaData', function (data) {
         myChart.setOption({
             series: [{
                 data: data.data

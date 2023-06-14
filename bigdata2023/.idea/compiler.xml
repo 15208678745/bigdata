@@ -11,6 +11,11 @@
         <module name="view" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bigdata2023" target="1.8" />
+      <module name="view" target="1.8" />
+      <module name="webui" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
