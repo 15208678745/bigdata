@@ -338,14 +338,18 @@
     // 指定配置和数据
     var option = {
         grid: {
-            top: '5%', left: '30%', right: '10%', bottom: '25%', // containLabel: true
+            top: '10%', left: '22%',
+            //right: '10%',
+            bottom: '10%', // containLabel: true
         }, xAxis: {
             show: false,
         }, yAxis: [{
-            type: 'category', inverse: true,
+            type: 'category', inverse: true, //设置刻度标签里面的文字颜色
+            axisLabel: {
+                color: "#ffd9ce" },
 
+            data: ['大数据开发', 'Linux', 'USA', 'Ind', 'Chi', 'Wor'], // 不显示y轴线
 
-            data: ['Bs', 'Id', 'USA', 'Ind', 'Chi', 'Wor'], // 不显示y轴线
             axisLine: {
                 show: false
             },
@@ -353,12 +357,12 @@
             // 不显示刻度
             axisTick: {
                 show: false
-            }, axisLabel: {
-                color: "#fff",
             },
 
         }, {
-            show: true, data: [19325, 23438, 31000, 121594, 134141, 681807], axisLine: {
+            show: true, data: [19325, 23438, 31000, 121594, 134141, 481807],
+            inverse: true,
+            axisLine: {
                 show: false
             }, axisTick: {
                 show: false
@@ -370,22 +374,34 @@
         }], series: [{
             name: '框',
             type: 'bar',
-            barCategoryGap: 50,
-            barWidth: 15,
-            data: [325, 238, 500, 294, 111, 600],
+            //barCategoryGap: 50,
+            barWidth: 20,
+            data: [100, 100, 100, 100, 100, 100],
             yAxisIndex: 1,
             itemStyle: {
-                color: 'none', borderColor: "#000", borderWith: 18, barBorderRadius: 15
+                color: 'none', borderColor: "#00c1de", borderWith: 3, barBorderRadius: 15
             }
         }, {
-            name: '条', type: 'bar', data: [183, 289, 234, 100, 174, 630], itemStyle: {
-                barBorderRadius: 15, color: function (params) {
+            name: '条', type: 'bar',
+            data:  [94.19,100.21,93.65,86.33,98.21,92.44],yAxisIndex: 0,
+            itemStyle: {
+                barBorderRadius: 20, color: function (params) {
+                    console.log(myColor[params.dataIndex])
                     return myColor[params.dataIndex];
                 },
-            }, barCategoryGap: 50, barWidth: 10, label: {
-                show: true, position: "inside", formatter: "{c}%"
+            },
+            barCategoryGap: '5%',
+            barWidth: 20, label: {
+                show: true, position: "right", formatter: "{c}%"
             }
-        },]
+        },], grid: {
+            left: "2%",
+            top: "20px",
+            right: "10%",
+            bottom: "8%",
+            containLabel: true
+        }
+
     };
 
     // 把配置给实例对象
