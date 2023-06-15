@@ -349,7 +349,7 @@
             axisLabel: {
                 color: "#ffd9ce" },
 
-            data: ['大数据开发', 'Linux', 'USA', 'Ind', 'Chi', 'Wor'], // 不显示y轴线
+            data: ['大数据开发工程师', '数据分析师', '大数据分析师', '数据采集', '数据统计员', '数据开发工程师'], // 不显示y轴线
 
             axisLine: {
                 show: false
@@ -393,7 +393,7 @@
             },
             barCategoryGap: '5%',
             barWidth: 20, label: {
-                show: true, position: "right", formatter: "{c}%"
+                show: true, position: "insideright", formatter: "{c}%"
             }
         },], grid: {
             left: "2%",
